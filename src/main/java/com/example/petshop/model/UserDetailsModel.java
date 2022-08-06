@@ -24,6 +24,17 @@ public class UserDetailsModel {
     @Column(name="address")
     String address;
 
+    public UserDetailsModel(String firstName,String middleName, String lastName, String phoneNumber, String address){
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
+    public UserDetailsModel(){
+
+    }
+
     public Integer getId() {
         return id;
     }
