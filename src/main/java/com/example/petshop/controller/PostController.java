@@ -34,16 +34,21 @@ public class PostController {
         try{
             String username= jwtService.extractUserName(jwtService.parseToken(request));
             Integer userId= userService.getUserIdByUserName(username);
-            SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-            Timestamp date = new Timestamp(System.currentTimeMillis());
-            Post post = new Post();
-            post.setPost(postRequest.getPost());
-            post.setUserId(userId);
-            post.setCreatedAt(date);
-            post.setUpdatedAt(date);
-            postRepository.save(post);
-            hashMap.put("message", "Posted Successfully");
-            hashMap.put("code", HttpStatus.OK);
+            if(userId == -1){
+                hashMap.put("message", "Invalid User");
+                hashMap.put("code", HttpStatus.BAD_REQUEST);
+            }else{
+                SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+                Timestamp date = new Timestamp(System.currentTimeMillis());
+                Post post = new Post();
+                post.setPost(postRequest.getPost());
+                post.setUserId(userId);
+                post.setCreatedAt(date);
+                post.setUpdatedAt(date);
+                postRepository.save(post);
+                hashMap.put("message", "Posted Successfully");
+                hashMap.put("code", HttpStatus.OK);
+            }
         }catch (Exception e){
             hashMap.put("message", "Internal Server Error");
             hashMap.put("code", HttpStatus.INTERNAL_SERVER_ERROR);
