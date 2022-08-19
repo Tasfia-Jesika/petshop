@@ -22,6 +22,17 @@ public class Comment {
     @Column(name = "updated_at")
     Date updatedAt;
 
+    public Comment(){
+    }
+
+    public Comment(Integer userId, Integer postId, String comment, Date createdAt, Date updatedAt){
+        this.userId = userId;
+        this.postId = postId;
+        this.comment = comment;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     public Integer getId() {
         return id;
     }

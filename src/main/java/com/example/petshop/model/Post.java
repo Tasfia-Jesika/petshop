@@ -21,6 +21,16 @@ public class Post {
     @Column(name="updated_at")
     Date updatedAt;
 
+    public Post(){
+    }
+
+    public Post(Integer userId, String post, Date createdAt, Date updatedAt){
+        this.userId = userId;
+        this.post = post;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     public Integer getId() {
         return id;
     }
