@@ -4,6 +4,7 @@ import com.example.petshop.RequestTemplate.PostRequest;
 import com.example.petshop.model.Comment;
 import com.example.petshop.model.Post;
 import com.example.petshop.repository.PostRepository;
+import com.example.petshop.repository.UserRepository;
 import com.example.petshop.service.JwtService;
 import com.example.petshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,9 +57,11 @@ public class PostController {
         }
     }
 
-    @RequestMapping(value = "/{userId}/list", method = RequestMethod.GET)
-    public ResponseEntity<HashMap> commentByPostId(@PathVariable Integer userId){
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ResponseEntity<HashMap> commentByPostId(HttpServletRequest httpServletRequest){
         HashMap<String, Object> hashMap = new HashMap<>();
+        String username= jwtService.extractUserName(jwtService.parseToken(httpServletRequest));
+        Integer userId= userService.getUserIdByUserName(username);
         List<Post> postList = null;
         postList = postRepository.findByUserId(userId);
         hashMap.put("message", "Post List");
