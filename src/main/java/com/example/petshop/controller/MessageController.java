@@ -56,7 +56,7 @@ public class MessageController {
             String username= jwtService.extractUserName(jwtService.parseToken(request));
             Integer userId= userService.getUserIdByUserName(username);
             Timestamp date = new Timestamp(System.currentTimeMillis());
-            List<Message> messageList = messageRepository.findBySenderIdAndReceiverId(userId, receiverId);
+            List<Message> messageList = messageRepository.findAllTheMessagesOfSpecificSenderAndReceiever(userId, receiverId);
             hashMap.put("data", messageList);
             hashMap.put("message", "Fetch Message Successfully");
             hashMap.put("code", HttpStatus.OK);
