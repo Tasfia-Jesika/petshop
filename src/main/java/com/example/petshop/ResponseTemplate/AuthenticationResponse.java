@@ -3,7 +3,7 @@ package com.example.petshop.ResponseTemplate;
 public class AuthenticationResponse {
     private String jwt;
     private String fullName;
-    Integer userId;
+    private Integer userId;
 
     public AuthenticationResponse(String jwt, String fullName, Integer userId){
         this.jwt=jwt;
@@ -17,6 +17,10 @@ public class AuthenticationResponse {
 
     public String getFullName() {
         return fullName;
+    }
+
+    public Integer getUserId() {
+        return userId;
     }
 }
 
